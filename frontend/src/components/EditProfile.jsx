@@ -42,7 +42,7 @@ const EditProfile = () => {
         }
         try {
             setLoading(true);
-            const res = await axios.post('http://localhost:4173/api/v1/user/profile/edit', formData,{
+            const res = await axios.post('http://localhost:3000/api/v1/user/profile/edit', formData,{
                 headers:{
                     'Content-Type':'multipart/form-data'
                 },
@@ -68,22 +68,24 @@ const EditProfile = () => {
         }
     }
     return (
-        <div className='flex max-w-2xl mx-auto pl-10'>
+        <div className='flex w-[100%] mx-auto p-4 pt-14 pb-20'>
             <section className='flex flex-col gap-6 w-full my-8'>
-                <h1 className='font-bold text-xl'>Edit Profile</h1>
-                <div className='flex items-center justify-between bg-gray-100 rounded-xl p-4'>
-                    <div className='flex items-center gap-3'>
+                <h1 className='font-bold text-xl text-center'>Edit Profile</h1>
+                <div className='bg-gray-100 text-center pb-10'>
+                <div className='flex items-center justify-between  rounded-xl p-4'>
+                    <div className='flex items-center gap-3 text-left'>
                         <Avatar>
                             <AvatarImage src={user?.profilePicture} alt="post_image" />
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                         <div>
-                            <h1 className='font-bold text-sm'>{user?.username}</h1>
-                            <span className='text-gray-600'>{user?.bio || 'Bio here...'}</span>
+                            <h1 className='font-bold text-sm'>UserName:- {user?.username}</h1>
+                            <span className='text-gray-600'>Bio:- {user?.bio || 'Bio here...'}</span>
                         </div>
                     </div>
                     <input ref={imageRef} onChange={fileChangeHandler} type='file' className='hidden' />
-                    <Button onClick={() => imageRef?.current.click()} className='bg-[#0095F6] h-8 hover:bg-[#318bc7]'>Change photo</Button>
+                </div>
+                <Button onClick={() => imageRef?.current.click()} className='bg-[#0095F6] h-8 hover:bg-[#318bc7]'>Change photo</Button>
                 </div>
                 <div>
                     <h1 className='font-bold text-xl mb-2'>Bio</h1>

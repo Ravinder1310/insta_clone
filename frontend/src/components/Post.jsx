@@ -33,7 +33,7 @@ const Post = ({ post }) => {
     const likeOrDislikeHandler = async () => {
         try {
             const action = liked ? 'dislike' : 'like';
-            const res = await axios.get(`http://localhost:4173/api/v1/post/${post._id}/${action}`, { withCredentials: true });
+            const res = await axios.get(`http://localhost:3000/api/v1/post/${post._id}/${action}`, { withCredentials: true });
             console.log(res.data);
             if (res.data.success) {
                 const updatedLikes = liked ? postLike - 1 : postLike + 1;
@@ -58,7 +58,7 @@ const Post = ({ post }) => {
     const commentHandler = async () => {
 
         try {
-            const res = await axios.post(`http://localhost:4173/api/v1/post/${post._id}/comment`, { text }, {
+            const res = await axios.post(`http://localhost:3000/api/v1/post/${post._id}/comment`, { text }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -84,7 +84,7 @@ const Post = ({ post }) => {
 
     const deletePostHandler = async () => {
         try {
-            const res = await axios.delete(`http://localhost:4173/api/v1/post/delete/${post?._id}`, { withCredentials: true })
+            const res = await axios.delete(`http://localhost:3000/api/v1/post/delete/${post?._id}`, { withCredentials: true })
             if (res.data.success) {
                 const updatedPostData = posts.filter((postItem) => postItem?._id !== post?._id);
                 dispatch(setPosts(updatedPostData));
@@ -98,7 +98,7 @@ const Post = ({ post }) => {
 
     const bookmarkHandler = async () => {
         try {
-            const res = await axios.get(`http://localhost:4173/api/v1/post/${post?._id}/bookmark`, {withCredentials:true});
+            const res = await axios.get(`http://localhost:3000/api/v1/post/${post?._id}/bookmark`, {withCredentials:true});
             if(res.data.success){
                 toast.success(res.data.message);
             }
@@ -107,8 +107,8 @@ const Post = ({ post }) => {
         }
     }
     return (
-        <div className='my-8 w-full max-w-sm mx-auto'>
-            <div className='flex items-center justify-between'>
+        <div className='my-12 w-full max-w-sm mx-auto'>
+            <div className='flex items-center px-2 justify-between'>
                 <div className='flex items-center gap-2'>
                     <Avatar>
                         <AvatarImage src={post.author?.profilePicture} alt="post_image" />
@@ -141,7 +141,7 @@ const Post = ({ post }) => {
                 alt="post_img"
             />
 
-            <div className='flex items-center justify-between my-2'>
+            <div className='flex items-center justify-between my-2 px-2'>
                 <div className='flex items-center gap-3'>
                     {
                         liked ? <FaHeart onClick={likeOrDislikeHandler} size={'24'} className='cursor-pointer text-red-600' /> : <FaRegHeart onClick={likeOrDislikeHandler} size={'22px'} className='cursor-pointer hover:text-gray-600' />
@@ -155,8 +155,8 @@ const Post = ({ post }) => {
                 </div>
                 <Bookmark onClick={bookmarkHandler} className='cursor-pointer hover:text-gray-600' />
             </div>
-            <span className='font-medium block mb-2'>{postLike} likes</span>
-            <p>
+            <span className='font-medium block mb-2 px-2'>{postLike} likes</span>
+            <p className='px-2'>
                 <span className='font-medium mr-2'>{post.author?.username}</span>
                 {post.caption}
             </p>
@@ -165,11 +165,11 @@ const Post = ({ post }) => {
                     <span onClick={() => {
                         dispatch(setSelectedPost(post));
                         setOpen(true);
-                    }} className='cursor-pointer text-sm text-gray-400'>View all {comment.length} comments</span>
+                    }} className='cursor-pointer text-sm text-gray-400 px-2'>View all {comment.length} comments</span>
                 )
             }
             <CommentDialog open={open} setOpen={setOpen} />
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between px-2'>
                 <input
                     type="text"
                     placeholder='Add a comment...'

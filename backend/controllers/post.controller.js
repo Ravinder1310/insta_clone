@@ -47,24 +47,33 @@ export const addNewPost = async (req, res) => {
 }
 export const getAllPost = async (req, res) => {
     try {
+        // const postss = await Post.find()
         const posts = await Post.find().sort({ createdAt: -1 })
             .populate({ path: 'author', select: 'username profilePicture' })
             .populate({
                 path: 'comments',
-                sort: { createdAt: -1 },
+                options: { sort: { createdAt: -1 } }, // This ensures comments are sorted as well
                 populate: {
                     path: 'author',
                     select: 'username profilePicture'
                 }
             });
+
+            // console.log("posts ==>",posts);
+            
         return res.status(200).json({
             posts,
             success: true
-        })
+        });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
     }
 };
+
 export const getUserPost = async (req, res) => {
     try {
         const authorId = req.id;

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { AtSign, Heart, MessageCircle } from 'lucide-react';
+import axios from 'axios';
 
 const Profile = () => {
   const params = useParams();
@@ -26,7 +27,7 @@ const Profile = () => {
 
   return (
     <div className='sm:flex w-[100%] sm:justify-center pt-20'>
-      <div className='flex flex-col gap-10 p-2 px-4 mb-20'>
+      <div className='flex flex-col gap-6 p-2 px-4 mb-20'>
         <div className='flex justify-between items-center gap-4'>
           <div className=' w-20 pr-3'>
             <Avatar className='h-20 w-20'>
@@ -36,16 +37,16 @@ const Profile = () => {
           </div>
           <div>
               <div className='flex items-center text-center gap-4'>
-                <p><span className='font-semibold'>{userProfile?.posts.length} </span>posts</p>
-                <p><span className='font-semibold'>{userProfile?.followers.length} </span>followers</p>
-                <p><span className='font-semibold'>{userProfile?.following.length} </span>following</p>
+                <p className='font-semibold'><span className='font-bold'>{userProfile?.posts.length} </span>posts</p>
+                <p className='font-semibold'><span className='font-bold'>{userProfile?.followers.length} </span>followers</p>
+                <p className='font-semibold'><span className='font-bold'>{userProfile?.following.length} </span>following</p>
               </div>
           </div>
         </div>
        <section>
        <div className='flex flex-col gap-1'>
-                <span className='font-semibold'>{userProfile?.bio || 'bio here...'}</span>
-                <Badge className='w-fit' variant='secondary'><AtSign /> <span className='pl-1'>{userProfile?.username}</span> </Badge>
+                <span className='font-bold'>{userProfile?.username}</span>
+                <span className=''>{userProfile?.bio || 'bio here...'}</span>
                 <span>🦾 Just need to take a risky step</span>
                 <span>🕛 It will change the life</span>
                 <span>☑️ DM for collaboration</span>

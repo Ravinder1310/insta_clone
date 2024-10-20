@@ -113,6 +113,20 @@ export const getProfile = async (req, res) => {
     }
 };
 
+
+export const getAllUsers = async (req, res) => {
+    try {
+        let users = await User.find();
+        return res.status(200).json({
+            users,
+            success: true
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
 export const editProfile = async (req, res) => {
     try {
         const userId = req.id;

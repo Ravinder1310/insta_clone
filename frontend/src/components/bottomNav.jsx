@@ -26,10 +26,9 @@ const BottomNav = () => {
         </div>
 
         {/* Packages Section */}
-        <div className="flex flex-col items-center hover:bg-pink-600 hover:text-white hover:cursor-pointer p-2 rounded-md">
+        <div className="flex flex-col items-center hover:bg-pink-600 hover:text-white hover:cursor-pointer p-2 rounded-md" onClick={() => { navigate(`/plans`) }}>
            <div className="text-md text-center">
             <Search className="m-auto"/>
-            
           </div>
         </div>
 

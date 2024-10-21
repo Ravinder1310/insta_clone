@@ -14,6 +14,7 @@ import { setOnlineUsers } from './redux/chatSlice'
 import { setLikeNotification } from './redux/rtnSlice'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import MlmDetails from './components/mlmDetails'
+import Incomes from './components/incomes'
 
 
 const browserRouter = createBrowserRouter([
@@ -36,6 +37,10 @@ const browserRouter = createBrowserRouter([
       {
         path: '/plans/',
         element: <ProtectedRoutes> <MlmDetails /></ProtectedRoutes>
+      },
+      {
+        path: '/incomes/',
+        element: <ProtectedRoutes> <Incomes /></ProtectedRoutes>
       },
       {
         path: '/chat',
